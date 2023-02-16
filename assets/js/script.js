@@ -4,11 +4,34 @@ const questionContainerElement = document.getElementById("question-container");
 var startScreenEl = document.getElementById("start-screen");
 const questionElement = document.getElementById("question");
 const answerButtonsElement = document.getElementById("answer-buttons");
+var timerEl = document.getElementById("countdown");
 
 let shuffledQuestions, currentQuestionIndex;
 
-startButton.addEventListener("click", startGame);
+function countdown() {
+  var timeLeft = 5;
 
+  var timeInterval = setInterval(function () {
+    if (timeLeft > 1) {
+      timerEl.textContent = timeLeft + ' seconds remaining';
+      timeLeft--;
+    } else if (timeLeft === 1) {
+      timerEl.textContent = timeLeft + ' second remaining';
+      timeLeft--;
+    } else {
+      timerEl.textContent = '';
+      clearInterval(timeInterval);
+      displayMessage();
+    }
+  }, 1000);
+}
+
+startButton.addEventListener("click", startGame);
+nextButton.addEventListener("click", () => {
+  currentQuestionIndex++;
+  setNextQuestion();
+  countdown()
+});
 function startGame() {
   startButton.classList.add("hide");
   shuffledQuestions = questions.sort(() => Math.random() - 0.5);
@@ -28,6 +51,7 @@ function showQuestion(question) {
   question.answers.forEach((answer) => {
     const button = document.createElement("button");
     button.innerText = answer.text;
+    button.classList.add("btn");
     if (answer.correct) {
       button.dataset.correct = answer.correct;
     }
@@ -37,15 +61,30 @@ function showQuestion(question) {
 }
 
 function resetState() {
+  clearStatusClass(document.body);
   nextButton.classList.add("hide");
   while (answerButtonsElement.firstChild) {
     answerButtonsElement.removeChild(answerButtonsElement.firstChild);
   }
 }
 
-function selectAnswer() {}
+function selectAnswer(e) {
+  const selectedButton = e.target;
+  const correct = selectedButton.dataset.correct;
+  Array.from(answerButtonsElement.children).forEach((button) => {});
+  if (shuffledQuestions.length > currentQuestionIndex + 1) {
+    nextButton.classList.remove("hide");
+  } else {
+    startButton.innerText = "restart";
+    startButton.classList.remove("hide");
+  }
+}
 
-const questions = [
+function clearStatusClass(element) {
+  element.classList.remove("correct");
+  element.classList.remove("wrong");
+}
+let questions = [
   {
     question: "Commonly used data types DO NOT include:",
     answers: [
@@ -54,13 +93,14 @@ const questions = [
       { text: "alerts", correct: true },
       { text: "numbers", correct: false },
     ],
-    // question: "Commonly used data types DO NOT include:",
-    // answers: [
-    //   { text: 'strings', correct: false },
-    //   { text: 'booleans', correct: false },
-    //   {text: 'alerts', correct: true},
-    //   {text: 'numbers', correct: false}
-
-    // ]
+  },
+  {
+    question: "Arrays in JavaScript can be used to store ____.",
+    answers: [
+      { text: "numbers and strings", correct: false },
+      { text: "other arrays", correct: false },
+      { text: "booleans", correct: false },
+      { text: "all of the above", correct: true },
+    ],
   },
 ];
