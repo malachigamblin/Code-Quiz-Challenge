@@ -2,7 +2,7 @@
 *::before,
 *::after {
   box-sizing: border-box;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
 }
 
 body {
@@ -70,4 +70,14 @@ h4 {
   align-items: center;
 }
 
+.countdown {
+  display: block;
+  text-align: center;
+  font-size: 25px;
+}
 
+#question {
+  display: block;
+  text-align: center;
+  font-size: 20px;
+}
