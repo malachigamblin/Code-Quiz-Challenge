@@ -11,6 +11,7 @@ var score = 0;
 var loseCounter = 0;
 let timeLeft = 60;
 let display = document.querySelector(".countdown");
+var refreshButton = document.getElementById("btn-refresh")
 
 let shuffledQuestions, currentQuestionIndex;
 
@@ -24,7 +25,6 @@ function startTimer() {
       alert("Time is up!");
       endGame();
     }
-
     display.innerHTML = timeLeft + " seconds";
   }, 1000);
 }
@@ -34,6 +34,7 @@ nextButton.addEventListener("click", () => {
   currentQuestionIndex++;
   setNextQuestion();
 });
+
 function startGame() {
   startButton.classList.add("hide");
   shuffledQuestions = questions.sort(() => Math.random() - 0.5);
@@ -55,9 +56,7 @@ function showQuestion(question) {
     const button = document.createElement("button");
     button.innerText = answer.text;
     button.classList.add("btn");
-    // if (answer.correct) {
     button.dataset.correct = answer.correct;
-    // }
     button.addEventListener("click", selectAnswer);
     answerButtonsElement.appendChild(button);
   });
@@ -81,8 +80,8 @@ function selectAnswer(e) {
   } else {
     timeLeft -= 5;
     display.innerHTML = timeLeft + " seconds";
-    nextButton.style.visibility = "hidden";
-    alert("your answer is incorrect, try again");
+    // nextButton.style.visibility = "hidden";
+    alert("your answer is incorrect, continue to the next question");
   }
   console.log("selectedAnswerEl = ", correct);
   Array.from(answerButtonsElement.children).forEach((button) => {});
@@ -90,16 +89,14 @@ function selectAnswer(e) {
     nextButton.classList.remove("hide");
   } else {
     endGame();
-    // startButton.innerText = "restart";
-    // startButton.classList.remove("hide");
+    clearInterval();
   }
 }
 
 function endGame() {
   clearInterval(setInterval);
   alert("Game over! Your score is:  " + score + "/" + questions.length);
-  startButton.innerText = "restart";
-  startButton.classList.remove("hide");
+  refreshButton.classList.remove("hide");
   nextButton.style.display = "none";
 }
 
