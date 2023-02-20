@@ -10,11 +10,12 @@ let timeLeft = 60;
 let display = document.querySelector(".countdown");
 var refreshButton = document.getElementById("btn-refresh");
 let shuffledQuestions, currentQuestionIndex;
+let interval;
 
 function startTimer() {
   timeLeft = 60;
 
-  const interval = setInterval(function () {
+  interval = setInterval(function () {
     timeLeft--;
     if (timeLeft <= 0) {
       clearInterval(interval);
@@ -70,19 +71,20 @@ function selectAnswer(e) {
   const correct = selectedButton.dataset.correct;
   console.log("selectedAnswer = ", correct);
   if (correct === "true") {
-    alert("your answer is correct, press OK to continue");
+    alert("your answer is correct, press OK then, continue to the next question");
     score++;
     startButton.style.display = "inital";
   } else {
     timeLeft -= 5;
     display.innerHTML = timeLeft + " seconds";
-    alert("your answer is incorrect, continue to the next question");
+    alert("your answer is incorrect, press OK then, continue to the next question");
   }
   console.log("selectedAnswerEl = ", correct);
   Array.from(answerButtonsElement.children).forEach((button) => {});
   if (shuffledQuestions.length > currentQuestionIndex + 1) {
     nextButton.classList.remove("hide");
   } else {
+    clearInterval(interval);
     endGame();
   }
 }
