@@ -5,14 +5,10 @@ var startScreenEl = document.getElementById("start-screen");
 const questionElement = document.getElementById("question");
 const answerButtonsElement = document.getElementById("answer-buttons");
 var timeEl = document.querySelector(".countdown");
-var incorrectAnswerGiven = false;
-var winCounter = 0;
 var score = 0;
-var loseCounter = 0;
 let timeLeft = 60;
 let display = document.querySelector(".countdown");
-var refreshButton = document.getElementById("btn-refresh")
-
+var refreshButton = document.getElementById("btn-refresh");
 let shuffledQuestions, currentQuestionIndex;
 
 function startTimer() {
@@ -80,7 +76,6 @@ function selectAnswer(e) {
   } else {
     timeLeft -= 5;
     display.innerHTML = timeLeft + " seconds";
-    // nextButton.style.visibility = "hidden";
     alert("your answer is incorrect, continue to the next question");
   }
   console.log("selectedAnswerEl = ", correct);
@@ -89,13 +84,16 @@ function selectAnswer(e) {
     nextButton.classList.remove("hide");
   } else {
     endGame();
-    clearInterval();
   }
 }
 
 function endGame() {
-  clearInterval(setInterval);
-  alert("Game over! Your score is:  " + score + "/" + questions.length);
+  const initials = prompt("Game over!" + "\nEnter your initials:");
+  if (initials) {
+    alert(initials + "! Your score is: " + score + "/" + questions.length);
+  } else {
+    alert("Your score is: " + score + "/" + questions.length);
+  }
   refreshButton.classList.remove("hide");
   nextButton.style.display = "none";
 }
