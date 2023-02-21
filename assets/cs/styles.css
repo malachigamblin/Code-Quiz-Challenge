@@ -57,14 +57,14 @@ body {
   display: none;
 }
 
-h2 {
+.header {
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 28px;
 }
 
-h4 {
+.body {
   font-size: 18px;
   display: flex;
   justify-content: center;
