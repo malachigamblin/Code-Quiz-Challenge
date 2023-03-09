@@ -28,7 +28,7 @@ The following images show screenshots of the application:
 <img width="1322" alt="Screenshot 2023-02-20 at 7 01 48 PM" src="https://user-images.githubusercontent.com/118701306/220215621-315fcc83-f70a-4881-a638-666649edd452.png">
 
 ## Link
-Deployed application: https://malachigamblin.github.io/Random-Password-Generator-Challenge/
+Deployed application: https://malachigamblin.github.io/Code-Quiz-Challenge/
 
 ## License
 
