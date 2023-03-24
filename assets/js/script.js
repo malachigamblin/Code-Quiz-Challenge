@@ -75,7 +75,7 @@ function selectAnswer(e) {
     score++;
     startButton.style.display = "inital";
   } else {
-    timeLeft -= 5;
+    timeLeft -= 10;
     display.innerHTML = timeLeft + " seconds";
     alert("your answer is incorrect, press OK then, continue to the next question");
   }
